@@ -19,7 +19,7 @@ open class PasswordContainerView: UIView {
     @IBOutlet open var passwordInputViews: [PasswordInputView]!
     @IBOutlet open weak var passwordDotView: PasswordDotView!
     @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var touchAuthenticationButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     //MARK: Property
     open var deleteButtonLocalizedTitle: String = "" {
@@ -27,6 +27,21 @@ open class PasswordContainerView: UIView {
             deleteButton.setTitle(NSLocalizedString(deleteButtonLocalizedTitle, comment: ""), for: .normal)
         }
     }
+    
+    open var shouldShowCancelButton: Bool = true {
+        didSet {
+            cancelButton.alpha = shouldShowCancelButton ? 1 : 0
+            cancelButton.isUserInteractionEnabled = shouldShowCancelButton
+        }
+    }
+
+    open var cancelButtonLocalizedTitle: String = "" {
+        didSet {
+            cancelButton.setTitle(NSLocalizedString(cancelButtonLocalizedTitle, comment: ""), for: .normal)
+        }
+    }
+    
+    open var didCancel: (() -> Void)?
     
     open weak var delegate: PasswordInputCompleteProtocol?
     fileprivate var touchIDContext = LAContext()
@@ -49,7 +64,7 @@ open class PasswordContainerView: UIView {
             guard !isVibrancyEffect else { return }
             deleteButton.setTitleColor(tintColor, for: UIControlState())
             passwordDotView.strokeColor = tintColor
-            touchAuthenticationButton.tintColor = tintColor
+            deleteButton.setTitleColor(tintColor, for: UIControlState())
             passwordInputViews.forEach {
                 $0.textColor = tintColor
                 $0.borderColor = tintColor
@@ -70,16 +85,6 @@ open class PasswordContainerView: UIView {
     open var isTouchAuthenticationAvailable: Bool {
         return touchIDContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     }
-    
-    open var touchAuthenticationEnabled = false {
-        didSet {
-            let enable = (isTouchAuthenticationAvailable && touchAuthenticationEnabled)
-            touchAuthenticationButton.alpha = enable ? 1.0 : 0.0
-            touchAuthenticationButton.isUserInteractionEnabled = enable
-        }
-    }
-    
-    open var touchAuthenticationReason = "Touch to unlock"
     
     //MARK: AutoLayout
     open var width: CGFloat = 0 {
@@ -135,10 +140,6 @@ open class PasswordContainerView: UIView {
         }
         deleteButton.titleLabel?.adjustsFontSizeToFitWidth = true
         deleteButton.titleLabel?.minimumScaleFactor = 0.5
-        touchAuthenticationEnabled = true
-        let image = touchAuthenticationButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
-        touchAuthenticationButton.setImage(image, for: UIControlState())
-        touchAuthenticationButton.tintColor = tintColor
     }
     
     //MARK: Input Wrong
@@ -160,18 +161,8 @@ open class PasswordContainerView: UIView {
         inputString = String(inputString.characters.dropLast())
     }
     
-    @IBAction func touchAuthenticationAction(_ sender: UIButton) {
-        guard isTouchAuthenticationAvailable else { return }
-        touchIDContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: touchAuthenticationReason) { (success, error) in
-            DispatchQueue.main.async {
-                if success {
-                    self.passwordDotView.inputDotCount = self.passwordDotView.totalDotCount
-                    // instantiate LAContext again for avoiding the situation that PasswordContainerView stay in memory when authenticate successfully
-                    self.touchIDContext = LAContext()
-                }
-                self.delegate?.touchAuthenticationComplete(self, success: success, error: error)
-            }
-        }
+    @IBAction func cancelAction(_ sender: UIButton) {
+        didCancel?()
     }
 }
 
@@ -227,7 +218,6 @@ private extension PasswordContainerView {
         deleteButton.setTitleColor(titleColor, for: .normal)
         passwordDotView.strokeColor = strokeColor
         passwordDotView.fillColor = fillColor
-        touchAuthenticationButton.tintColor = strokeColor
         passwordInputViews.forEach { passwordInputView in
             passwordInputView.circleBackgroundColor = circleBackgroundColor
             passwordInputView.borderColor = borderColor
