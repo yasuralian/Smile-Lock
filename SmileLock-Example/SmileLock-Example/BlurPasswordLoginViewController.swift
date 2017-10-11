@@ -9,7 +9,7 @@ import UIKit
 import SmileLock
 
 class BlurPasswordLoginViewController: UIViewController {
-
+    
     @IBOutlet weak var passwordStackView: UIStackView!
     
     //MARK: Property
@@ -26,12 +26,18 @@ class BlurPasswordLoginViewController: UIViewController {
             self?.dismiss(animated: true, completion: nil)
         }
         
-        passwordUIValidation.failure = { _ in
+        passwordUIValidation.failure = {
             //do not forget add [weak self] if the view controller become nil at some point during its lifetime
             print("*️⃣ failure!")
         }
         
         //visual effect password UI
         passwordUIValidation.view.rearrangeForVisualEffectView(in: self)
+        
+        passwordUIValidation.view.deleteButtonLocalizedTitle = "削除"
+        passwordUIValidation.view.cancelButtonLocalizedTitle = "キャンセル"
+        passwordUIValidation.view.didCancel = {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

@@ -27,6 +27,9 @@ class PasswordLoginViewController: UIViewController {
         //customize password UI
         passwordContainerView.tintColor = UIColor.color(.textColor)
         passwordContainerView.highlightedColor = UIColor.color(.blue)
+        passwordContainerView.didCancel = {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

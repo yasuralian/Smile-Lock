@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B7D5D0E51E35D9C600B7A6BF"
-               BuildableName = "SmileLock.framework"
-               BlueprintName = "SmileLock"
-               ReferencedContainer = "container:SmileLock.xcodeproj">
+               BlueprintIdentifier = "B7D5D1DB1E35DD4000B7A6BF"
+               BuildableName = "SmileLock-Example.app"
+               BlueprintName = "SmileLock-Example"
+               ReferencedContainer = "container:SmileLock-Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,20 +33,30 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B7D5D0EE1E35D9C600B7A6BF"
-               BuildableName = "SmileLockTests.xctest"
-               BlueprintName = "SmileLockTests"
-               ReferencedContainer = "container:SmileLock.xcodeproj">
+               BlueprintIdentifier = "B7D5D1EF1E35DD4000B7A6BF"
+               BuildableName = "SmileLock-ExampleTests.xctest"
+               BlueprintName = "SmileLock-ExampleTests"
+               ReferencedContainer = "container:SmileLock-Example.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B7D5D1FA1E35DD4000B7A6BF"
+               BuildableName = "SmileLock-ExampleUITests.xctest"
+               BlueprintName = "SmileLock-ExampleUITests"
+               ReferencedContainer = "container:SmileLock-Example.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B7D5D0E51E35D9C600B7A6BF"
-            BuildableName = "SmileLock.framework"
-            BlueprintName = "SmileLock"
-            ReferencedContainer = "container:SmileLock.xcodeproj">
+            BlueprintIdentifier = "B7D5D1DB1E35DD4000B7A6BF"
+            BuildableName = "SmileLock-Example.app"
+            BlueprintName = "SmileLock-Example"
+            ReferencedContainer = "container:SmileLock-Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,15 +73,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B7D5D0E51E35D9C600B7A6BF"
-            BuildableName = "SmileLock.framework"
-            BlueprintName = "SmileLock"
-            ReferencedContainer = "container:SmileLock.xcodeproj">
+            BlueprintIdentifier = "B7D5D1DB1E35DD4000B7A6BF"
+            BuildableName = "SmileLock-Example.app"
+            BlueprintName = "SmileLock-Example"
+            ReferencedContainer = "container:SmileLock-Example.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -81,15 +92,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B7D5D0E51E35D9C600B7A6BF"
-            BuildableName = "SmileLock.framework"
-            BlueprintName = "SmileLock"
-            ReferencedContainer = "container:SmileLock.xcodeproj">
+            BlueprintIdentifier = "B7D5D1DB1E35DD4000B7A6BF"
+            BuildableName = "SmileLock-Example.app"
+            BlueprintName = "SmileLock-Example"
+            ReferencedContainer = "container:SmileLock-Example.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

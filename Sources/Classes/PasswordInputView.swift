@@ -63,7 +63,7 @@ open class PasswordInputView: UIView {
     //MARK: Life Cycle
     #if TARGET_INTERFACE_BUILDER
     override public func willMoveToSuperview(newSuperview: UIView?) {
-        configureSubviews()
+    configureSubviews()
     }
     #else
     override open func awakeFromNib() {
@@ -71,8 +71,8 @@ open class PasswordInputView: UIView {
         configureSubviews()
     }
     #endif
-
-    func touchDown() {
+    
+    @objc func touchDown() {
         //delegate callback
         delegate?.passwordInputView(self, tappedString: numberString)
         
@@ -81,7 +81,7 @@ open class PasswordInputView: UIView {
         touchDownAnimation()
     }
     
-    func touchUp() {
+    @objc func touchUp() {
         //now touch up, so set touch up flag --> true
         touchUpFlag = true
         
@@ -107,7 +107,7 @@ open class PasswordInputView: UIView {
         
         //update label
         label.text = numberString
-        label.font = UIFont.systemFont(ofSize: radius * fontSizeRatio, weight: UIFontWeightThin)
+        label.font = UIFont.systemFont(ofSize: radius * fontSizeRatio, weight: UIFont.Weight.thin)
         label.textColor = textColor
         
         //update circle view
@@ -119,7 +119,7 @@ open class PasswordInputView: UIView {
         circleView.layer.borderWidth = isVibrancyEffect ? borderWidth : 0
         
         //update mask
-        let path = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: 2.0 * CGFloat(M_PI), clockwise: false)
+        let path = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: 2.0 * CGFloat(Double.pi), clockwise: false)
         let maskLayer = CAShapeLayer()
         maskLayer.path = path.cgPath
         layer.mask = maskLayer
@@ -133,7 +133,7 @@ private extension PasswordInputView {
     //MARK: Awake
     func configureSubviews() {
         addSubview(circleView)
-
+        
         //configure label
         NSLayoutConstraint.addEqualConstraintsFromSubView(label, toSuperView: self)
         label.textAlignment = .center
@@ -148,7 +148,7 @@ private extension PasswordInputView {
     //MARK: Animation
     func touchDownAction() {
         let originFont = label.font
-        label.font = UIFont.systemFont(ofSize: originFont!.pointSize, weight: UIFontWeightLight)
+        label.font = UIFont.systemFont(ofSize: originFont!.pointSize, weight: UIFont.Weight.light)
         label.textColor = highlightTextColor
         if !self.isVibrancyEffect {
             backgroundColor = highlightBackgroundColor
@@ -158,7 +158,7 @@ private extension PasswordInputView {
     
     func touchUpAction() {
         let originFont = label.font
-        label.font = UIFont.systemFont(ofSize: originFont!.pointSize, weight: UIFontWeightThin)
+        label.font = UIFont.systemFont(ofSize: originFont!.pointSize, weight: UIFont.Weight.thin)
         label.textColor = textColor
         backgroundColor = borderColor
         circleView.backgroundColor = circleBackgroundColor
@@ -166,7 +166,7 @@ private extension PasswordInputView {
     
     func touchDownAnimation() {
         isAnimating = true
-        tappedAnimation(animations: { 
+        tappedAnimation(animations: {
             self.touchDownAction()
         }) {
             if self.touchUpFlag {
@@ -179,7 +179,7 @@ private extension PasswordInputView {
     
     func touchUpAnimation() {
         isAnimating = true
-        tappedAnimation(animations: { 
+        tappedAnimation(animations: {
             self.touchUpAction()
         }) {
             self.isAnimating = false

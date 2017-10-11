@@ -38,7 +38,7 @@ open class PasswordDotView: UIView {
             setNeedsDisplay()
         }
     }
-
+    
     fileprivate var radius: CGFloat = 6
     fileprivate let spacingRatio: CGFloat = 2
     fileprivate let borderWidthRatio: CGFloat = 1 / 5
@@ -141,7 +141,7 @@ private extension PasswordDotView {
         }
         radius = radius - radius * borderWidthRatio
     }
-
+    
     //MARK: Dots Layout
     func getDotPositions(_ isOdd: Bool) -> [CGPoint] {
         let centerX = bounds.midX
@@ -160,7 +160,7 @@ private extension PasswordDotView {
 
 internal extension UIBezierPath {
     convenience init(circleWithCenter center: CGPoint, radius: CGFloat, lineWidth: CGFloat) {
-        self.init(arcCenter: center, radius: radius, startAngle: 0, endAngle: 2.0 * CGFloat(M_PI), clockwise: false)
+        self.init(arcCenter: center, radius: radius, startAngle: 0, endAngle: 2.0 * CGFloat(Double.pi), clockwise: false)
         self.lineWidth = lineWidth
     }
 }
