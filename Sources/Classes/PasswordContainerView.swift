@@ -141,10 +141,11 @@ open class PasswordContainerView: UIView {
             $0.delegate = self
         }
         cancelButtonEnabled = true
+        
         deleteButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        deleteButton.titleLabel?.minimumScaleFactor = 0.5
+        deleteButton.titleLabel?.minimumScaleFactor = 0.1
         cancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        cancelButton.titleLabel?.minimumScaleFactor = 0.5
+        cancelButton.titleLabel?.minimumScaleFactor = 0.1
     }
     
     //MARK: Input Wrong
